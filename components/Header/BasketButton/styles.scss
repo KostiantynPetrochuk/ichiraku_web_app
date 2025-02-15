@@ -1,0 +1,44 @@
+.header-bot-basket {
+  &__button {
+    height: 40px;
+    width: 160px;
+    background-color: #f7d22d;
+    border: none;
+    border-radius: 8px;
+    outline: none;
+    font-weight: bold;
+    display: flex;
+    align-items: center;
+    justify-content: space-around;
+    cursor: pointer;
+    transition: 0.3s;
+    color: #000;
+    text-decoration: none;
+
+    .header-bot-basket__button:hover {
+      background-color: #ffdc40;
+    }
+  }
+
+  &__count {
+    border-left: 2px solid black;
+    padding-left: 10px;
+  }
+
+  &-amount {
+    display: flex;
+    justify-content: space-between;
+    padding: 15px 10px 15px 0;
+
+    & span:nth-child(1) {
+      font-weight: bold;
+      font-size: 18px;
+    }
+
+    & span:nth-child(2) {
+      font-weight: bold;
+      font-size: 24px;
+      color: #ffdc40;
+    }
+  }
+}

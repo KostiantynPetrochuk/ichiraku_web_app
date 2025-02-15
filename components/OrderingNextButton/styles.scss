@@ -1,0 +1,43 @@
+.basket-button-next {
+  height: 55px;
+  width: 240px;
+  background-color: #ffdc40;
+  border-radius: 8px;
+  border: 1px solid transparent;
+  cursor: pointer;
+  font-weight: bold;
+  position: relative;
+  padding: 0 10px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  text-decoration: none;
+  color: #000000;
+
+  &-arrow {
+    width: 20px;
+    display: inline-block;
+
+    & span {
+      display: inline-block;
+      height: 2px;
+      width: 8px;
+      background-color: #000000;
+      position: relative;
+    }
+
+    & span:nth-child(1) {
+      transform: rotate(45deg);
+      position: absolute;
+      top: 24px;
+      right: 25px;
+    }
+
+    & span:nth-child(2) {
+      transform: rotate(-45deg);
+      position: absolute;
+      bottom: 24px;
+      right: 25px;
+    }
+  }
+}

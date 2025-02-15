@@ -1,0 +1,12 @@
+.basket-buttons {
+  display: flex;
+  justify-content: space-between;
+  margin: 40px 0;
+}
+
+@media screen and (max-width: 600px) {
+  .basket-buttons {
+    flex-direction: column-reverse;
+    align-items: center;
+  }
+}

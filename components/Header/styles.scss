@@ -1,0 +1,60 @@
+.header {
+  display: flex;
+  padding-top: 10px;
+  background-color: #fff;
+
+  @keyframes slideDown {
+    from {
+      transform: translateY(-100%);
+    }
+    to {
+      transform: translateY(-60%);
+    }
+  }
+
+  & .container {
+    width: 100%;
+    position: relative;
+  }
+
+  &-top {
+    display: flex;
+    justify-content: space-between;
+
+    &-left {
+      display: flex;
+    }
+
+    &-right {
+      display: flex;
+      align-items: center;
+
+      &__button {
+        margin-right: 28px;
+      }
+    }
+  }
+
+  &-bot {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    top: -100px;
+    left: 0;
+    width: 100%;
+    background-color: #fff;
+    transition: top 0.5s;
+  }
+}
+
+@media screen and (max-width: 1200px) {
+  .header-top,
+  .header-bot {
+    display: none;
+  }
+  @keyframes slideDown {
+    to {
+      transform: translateY(0);
+    }
+  }
+}

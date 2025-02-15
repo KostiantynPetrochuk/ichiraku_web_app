@@ -1,0 +1,20 @@
+.basket-ordering {
+  display: grid;
+  grid-template-columns: 1fr 400px;
+
+  @media screen and (max-width: 1200px) {
+    display: flex;
+    flex-direction: column;
+    max-width: 690px;
+    align-items: center;
+    margin: 0 auto;
+  }
+
+  @media screen and (max-width: 800px) {
+    max-width: 490px;
+  }
+
+  @media screen and (max-width: 600px) {
+    max-width: 320px;
+  }
+}

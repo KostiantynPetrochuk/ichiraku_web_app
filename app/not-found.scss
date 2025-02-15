@@ -1,0 +1,19 @@
+.error {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+
+  &-title {
+    color: #f7d22d;
+    font-weight: bold;
+    font-size: 200px;
+    text-shadow: 5px 5px 5px #898989;
+  }
+
+  &-description {
+    color: #f7d22d;
+    font-size: 50px;
+    text-shadow: 5px 5px 5px #898989;
+  }
+}

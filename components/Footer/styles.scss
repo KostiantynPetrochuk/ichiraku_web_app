@@ -1,0 +1,70 @@
+.footer {
+  padding: 10px 0;
+
+  &-top {
+    display: flex;
+    justify-content: space-between;
+
+    @media screen and (max-width: 900px) {
+      flex-direction: column;
+      align-items: center;
+    }
+
+    &-left {
+      display: flex;
+      flex-direction: column;
+
+      @media screen and (max-width: 900px) {
+        align-items: center;
+      }
+    }
+
+    &-right {
+      @media screen and (max-width: 900px) {
+        margin-bottom: 20px;
+      }
+    }
+  }
+
+  &__logo {
+    height: 100px;
+    width: 100px;
+  }
+
+  &-title {
+    text-align: center;
+  }
+
+  &__button {
+    height: 40px;
+    width: 180px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    background-color: #f3f3f7;
+    border-radius: 28px;
+    outline: none;
+    border: none;
+    color: #696f7a;
+    font-weight: bold;
+    font-size: 14px;
+    margin: 10px 0;
+  }
+
+  &__phone {
+    color: #f7d22d;
+    font-size: 26px;
+    font-weight: bold;
+    text-align: center;
+  }
+
+  &-bot {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+
+    @media screen and (max-width: 800px) {
+      flex-direction: column;
+    }
+  }
+}

@@ -1,0 +1,17 @@
+.footer-socials-item {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 50px;
+  width: 100px;
+  background-color: #fff;
+  border: 2px solid #e3ecf5;
+  border-radius: 13px;
+  margin: 0 5px;
+
+  &:nth-child(odd) {
+    @media screen and (max-width: 600px) {
+      margin: 0 0 10px auto;
+    }
+  }
+}

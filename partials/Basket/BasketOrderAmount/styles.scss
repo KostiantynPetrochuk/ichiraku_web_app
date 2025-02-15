@@ -1,0 +1,25 @@
+.basket-total-amount {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin: 40px 0;
+
+  &__title {
+    font-weight: bold;
+    font-size: 24px;
+
+    @media screen and (max-width: 400px) {
+      font-size: 20px;
+    }
+  }
+
+  &__count {
+    color: #ffdc40;
+    font-weight: bold;
+    font-size: 36px;
+
+    @media screen and (max-width: 400px) {
+      font-size: 34px;
+    }
+  }
+}

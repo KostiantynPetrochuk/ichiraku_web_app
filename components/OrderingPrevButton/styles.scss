@@ -1,0 +1,48 @@
+.basket-button__back {
+  font-size: 15px;
+  font-weight: bold;
+  text-decoration: none;
+  color: #696f7a;
+  position: relative;
+  display: flex;
+  align-items: center;
+
+  @media screen and (max-width: 600px) {
+    margin-top: 20px;
+  }
+}
+
+.basket-button-back {
+  &__arrow {
+    width: 20px;
+    display: inline-block;
+
+    & span {
+      display: inline-block;
+      height: 2px;
+      width: 8px;
+      background-color: #696f7a;
+      position: relative;
+    }
+
+    & span:nth-child(1) {
+      transform: rotate(-45deg);
+      position: absolute;
+      top: 25px;
+
+      @media screen and (max-width: 600px) {
+        top: 5px;
+      }
+    }
+
+    & span:nth-child(2) {
+      transform: rotate(45deg);
+      position: absolute;
+      bottom: 25px;
+
+      @media screen and (max-width: 600px) {
+        bottom: 5px;
+      }
+    }
+  }
+}

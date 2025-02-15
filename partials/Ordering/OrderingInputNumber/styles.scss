@@ -1,0 +1,9 @@
+.basket-ordering__input::-webkit-outer-spin-button,
+.basket-ordering__input::-webkit-inner-spin-button {
+  -webkit-appearance: none;
+  margin: 0;
+}
+
+.basket-ordering__input[type="number"] {
+  -moz-appearance: textfield;
+}

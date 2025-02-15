@@ -1,0 +1,20 @@
+.novelty-items {
+  display: flex;
+  justify-content: space-around;
+  padding: 0;
+
+  @media screen and (max-width: 1200px) {
+    justify-content: space-around;
+  }
+
+  @media screen and (max-width: 800px) {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    grid-template-rows: 1fr 1fr;
+  }
+
+  @media screen and (max-width: 400px) {
+    grid-template-columns: 1fr;
+    align-items: center;
+  }
+}

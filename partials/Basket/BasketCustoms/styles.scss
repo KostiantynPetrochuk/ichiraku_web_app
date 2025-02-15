@@ -1,0 +1,16 @@
+.basket-customs {
+  padding: 0;
+  max-height: 400px;
+  overflow: auto;
+}
+
+.basket-customs::-webkit-scrollbar {
+  width: 8px;
+  background-color: #f1f1f1;
+  border-radius: 10px;
+}
+
+.basket-customs::-webkit-scrollbar-thumb {
+  background-color: #aaa;
+  border-radius: 10px;
+}

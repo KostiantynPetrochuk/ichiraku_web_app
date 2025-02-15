@@ -1,0 +1,62 @@
+.orderingModal {
+  &__title {
+    color: #ffdc40;
+    text-align: center;
+  }
+
+  &-buyer-row {
+    display: flex;
+    justify-content: space-between;
+    margin: 8px 0;
+
+    &__title {
+      font-weight: bold;
+      margin-right: 10px;
+    }
+
+    &__data {
+      text-align: right;
+    }
+  }
+
+  &-list {
+    list-style: none;
+    padding: 0 20px;
+    border-bottom: 1px solid rgb(154, 154, 154);
+    padding-bottom: 10px;
+
+    &-item {
+      display: grid;
+      grid-template-columns: 1fr 0.1fr 0.3fr;
+      margin: 8px 0;
+
+      & span:nth-child(2) {
+        margin: 0 20px;
+      }
+
+      & span:nth-child(3) {
+        text-align: right;
+      }
+    }
+
+    &__title {
+      color: #ffdc40;
+      text-align: center;
+    }
+  }
+
+  &-result {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+
+    &__title {
+      color: #ffdc40;
+    }
+
+    &__amount {
+      font-weight: bold;
+      font-size: 18px;
+    }
+  }
+}
