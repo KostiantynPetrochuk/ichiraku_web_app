@@ -8,14 +8,16 @@ type OrderingModalT = {
   handleCloseModal: Dispatch<SetStateAction<boolean>>;
   handleSubmitOrder: () => Promise<void>;
   customsList: any[];
-  firstName: string;
-  lastName: string;
-  surrName: string;
-  phone: string;
-  delivery: boolean;
-  address: string;
-  deliveryTime: string;
-  paymentMethod: boolean;
+  formData: {
+    firstName: string;
+    lastName: string;
+    surrName: string;
+    phone: string;
+    delivery: boolean;
+    address: string;
+    deliveryTime: string;
+    paymentMethod: boolean;
+  };
 };
 
 const OrderingModal = (props: OrderingModalT) => {
@@ -24,14 +26,7 @@ const OrderingModal = (props: OrderingModalT) => {
     handleCloseModal,
     handleSubmitOrder,
     customsList,
-    firstName,
-    lastName,
-    surrName,
-    phone,
-    delivery,
-    address,
-    deliveryTime,
-    paymentMethod,
+    formData,
   } = props;
 
   return (
@@ -44,42 +39,42 @@ const OrderingModal = (props: OrderingModalT) => {
       <div className="orderingModal-buyer-row">
         <span className="orderingModal-buyer-row__title">Прізвище:</span>
         <span className="orderingModal-buyer-row__data">
-          {firstName ? firstName : "-"}
+          {formData.firstName ? formData.firstName : "-"}
         </span>
       </div>
       <div className="orderingModal-buyer-row">
         <span className="orderingModal-buyer-row__title">Ім'я:</span>
         <span className="orderingModal-buyer-row__data">
-          {lastName ? lastName : "-"}
+          {formData.lastName ? formData.lastName : "-"}
         </span>
       </div>
       <div className="orderingModal-buyer-row">
         <span className="orderingModal-buyer-row__title">По батькові:</span>
         <span className="orderingModal-buyer-row__data">
-          {surrName ? surrName : "-"}
+          {formData.surrName ? formData.surrName : "-"}
         </span>
       </div>
       <div className="orderingModal-buyer-row">
         <span className="orderingModal-buyer-row__title">Телефон:</span>
         <span className="orderingModal-buyer-row__data">
-          {phone ? phone : "-"}
+          {formData.phone ? formData.phone : "-"}
         </span>
       </div>
       <div className="orderingModal-buyer-row">
         <span className="orderingModal-buyer-row__title">Доставка:</span>
         <span className="orderingModal-buyer-row__data">
-          {delivery ? "Так" : "Ні"}
+          {formData.delivery ? "Так" : "Ні"}
         </span>
       </div>
 
-      {delivery ? (
+      {formData.delivery ? (
         <>
           <div className="orderingModal-buyer-row">
             <span className="orderingModal-buyer-row__title">
               Адреса доставки:
             </span>
             <span className="orderingModal-buyer-row__data">
-              {address ? address : "-"}
+              {formData.address ? formData.address : "-"}
             </span>
           </div>
           <div className="orderingModal-buyer-row">
@@ -87,7 +82,7 @@ const OrderingModal = (props: OrderingModalT) => {
               Час доставки:
             </span>
             <span className="orderingModal-buyer-row__data">
-              {deliveryTime ? deliveryTime : "-"}
+              {formData.deliveryTime ? formData.deliveryTime : "-"}
             </span>
           </div>
           <div className="orderingModal-buyer-row">
@@ -95,7 +90,7 @@ const OrderingModal = (props: OrderingModalT) => {
               Спосіб оплати:
             </span>
             <span className="orderingModal-buyer-row__data">
-              {paymentMethod ? "карта" : "готівка"}
+              {formData.paymentMethod ? "карта" : "готівка"}
             </span>
           </div>
         </>

@@ -1,17 +1,19 @@
 import "./styles.scss";
 
 type OrderingInputProps = {
+  name: string;
   inputName: string;
   inputClassName: string;
   value: string;
   min: number;
-  setValue: React.Dispatch<React.SetStateAction<string>>;
+  setValue: (value: any, name: any) => void;
   isInputValid: boolean;
-  setIsInputValid: React.Dispatch<React.SetStateAction<boolean>>;
+  setIsInputValid: (value: any, name: any) => void;
 };
 
 const OrderingInputNumber = (props: OrderingInputProps) => {
   const {
+    name,
     inputName,
     inputClassName,
     min,
@@ -24,23 +26,21 @@ const OrderingInputNumber = (props: OrderingInputProps) => {
 
   const handleChangeValue = (event: React.ChangeEvent<HTMLInputElement>) => {
     const filteredValue = event.target.value.replace(/[^0-9]/g, "");
-
-    setValue(filteredValue);
+    setValue(filteredValue, name);
     if (filteredValue.length > min - 1 && !isInputValid) {
-      setIsInputValid(true);
+      setIsInputValid(true, name);
     }
-
     if (filteredValue.length < min && isInputValid) {
-      setIsInputValid(false);
+      setIsInputValid(false, name);
     }
   };
 
   const handleInputBlur = () => {
     if (value.length < min) {
-      setIsInputValid(false);
+      setIsInputValid(false, name);
       return;
     }
-    setIsInputValid(true);
+    setIsInputValid(true, name);
   };
 
   return (
@@ -49,7 +49,7 @@ const OrderingInputNumber = (props: OrderingInputProps) => {
       <input
         className={`basket-ordering__input${isInputValid ? "" : " _notValid"}`}
         type="text"
-        name=""
+        name={name}
         id=""
         value={value}
         onChange={handleChangeValue}

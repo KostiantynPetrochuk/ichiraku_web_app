@@ -1,12 +1,13 @@
 import "./styles.scss";
 
 type OrderingPaymentProps = {
+  name: string;
   paymentMethod: boolean;
-  setPaymentMethod: React.Dispatch<React.SetStateAction<boolean>>;
+  setPaymentMethod: (value: any, name: string) => void;
 };
 
 const OrderingPayment = (props: OrderingPaymentProps) => {
-  const { paymentMethod, setPaymentMethod } = props;
+  const { name, paymentMethod, setPaymentMethod } = props;
 
   return (
     <div className="basket-ordering-payment">
@@ -15,10 +16,10 @@ const OrderingPayment = (props: OrderingPaymentProps) => {
         <input
           className="basket-ordering-payment-real-radio"
           type="radio"
-          name="payment"
+          name={name}
           id=""
           checked={paymentMethod}
-          onChange={() => setPaymentMethod(true)}
+          onChange={() => setPaymentMethod(true, name)}
         />
         <span className="basket-ordering-payment-fake-radio"></span>
         <img
@@ -32,10 +33,10 @@ const OrderingPayment = (props: OrderingPaymentProps) => {
         <input
           className="basket-ordering-payment-real-radio"
           type="radio"
-          name="payment"
+          name={name}
           id=""
           checked={!paymentMethod}
-          onChange={() => setPaymentMethod(false)}
+          onChange={() => setPaymentMethod(false, name)}
         />
         <span className="basket-ordering-payment-fake-radio"></span>
         <img

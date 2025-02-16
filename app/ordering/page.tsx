@@ -1,6 +1,5 @@
 "use client";
-import { useEffect, useState } from "react";
-
+import { useState } from "react";
 import BreadCrumbs from "../../components/BreadCrumbs";
 import OrderingButtons from "../../components/OrderingButtons";
 import OrderingSteps from "../../components/OrderingSteps";
@@ -14,115 +13,103 @@ import {
 import { useAppSelector } from "../../hooks";
 import { clearBasket } from "../../store/customSlice";
 import { useAppDispatch } from "../../hooks";
+import { API_URL } from "@/constants";
 
 import "./styles.scss";
 
-// todo: refactor page
-
 const Ordering = () => {
   const dispatch = useAppDispatch();
-
-  const [firstName, setFirstName] = useState<string>("");
-  const [isValidFirstName, setIsValidFirstName] = useState<boolean>(true);
-  const [lastName, setLastName] = useState<string>("");
-  const [isValidLastName, setIsValidLastName] = useState<boolean>(true);
-  const [surrName, setSurrName] = useState<string>("");
-  const [isValidSurrName, setIsValidSurrName] = useState<boolean>(true);
-  const [phone, setPhone] = useState<string>("");
-  const [isValidPhone, setIsValidPhone] = useState<boolean>(true);
-  const [delivery, setDelivery] = useState<boolean>(false);
-
-  const [address, setAddress] = useState<string>("");
-  const [isValidAddress, setIsValidAddress] = useState<boolean>(true);
-  const [deliveryTime, setDeliveryTime] = useState<string>("");
-  const [isValidDeliveryTime, setIsValidDeliveryTime] = useState<boolean>(true);
-  const [paymentMethod, setPaymentMethod] = useState<boolean>(false);
-
-  const [loading, setLoading] = useState<boolean>(true);
+  const [formData, setFormData] = useState({
+    firstName: "",
+    lastName: "",
+    surrName: "",
+    phone: "",
+    delivery: false,
+    address: "",
+    deliveryTime: "",
+    paymentMethod: false,
+  });
+  const [validations, setValidations] = useState({
+    firstName: true,
+    lastName: true,
+    surrName: true,
+    phone: true,
+    address: true,
+    deliveryTime: true,
+  });
+  const [loading, setLoading] = useState<boolean>(false);
   const [showNotification, setShowNotification] = useState(false);
   const [showErrorMessage, setShowErrorMessage] = useState(false);
-
   const [modalState, setModalState] = useState<boolean>(false);
-
   const customsList: any[] = useAppSelector((state) => state.customs.list);
 
+  const handleChange = (value: any, inputName: any) => {
+    setFormData({ ...formData, [inputName]: value });
+  };
+  const handleChangeValidation = (value: any, inputName: any) => {
+    setValidations({ ...validations, [inputName]: value });
+  };
   const scrollToTop = () => {
     setTimeout(() => {
       window.scrollTo({ top: 0, behavior: "smooth" });
     }, 3000);
   };
 
+  const validateForm = () => {
+    const newValidations = {
+      firstName: formData.firstName.length >= 3,
+      lastName: formData.lastName.length >= 3,
+      surrName: formData.surrName.length >= 3,
+      phone: formData.phone.length >= 10,
+      address: formData.delivery ? formData.address.length >= 10 : true,
+      deliveryTime: formData.delivery
+        ? formData.deliveryTime.length >= 4
+        : true,
+    };
+    setValidations(newValidations);
+    return Object.values(newValidations).every(Boolean);
+  };
+
   const handleSubmitOrder = async (): Promise<void> => {
     setLoading(true);
-
     let isValid = true;
-
-    switch (true) {
-      case delivery && deliveryTime.length < 4 && address.length < 10:
-        setLoading(false);
-        setShowNotification(true);
-        setModalState(false);
-        scrollToTop();
-        setIsValidAddress(false);
-        setIsValidDeliveryTime(false);
-        isValid = false;
-        break;
-
-      case delivery && address.length < 10:
-        setLoading(false);
-        setShowNotification(true);
-        setModalState(false);
-        scrollToTop();
-        setIsValidAddress(false);
-        isValid = false;
-        break;
-
-      case delivery && deliveryTime.length < 4:
-        setLoading(false);
-        setShowNotification(true);
-        setModalState(false);
-        scrollToTop();
-        setIsValidDeliveryTime(false);
-        isValid = false;
-        break;
+    if (!validateForm()) {
+      setShowNotification(true);
+      setLoading(false);
+      setModalState(false);
+      scrollToTop();
+      return;
     }
-
     const formFields = [
       {
         name: "firstName",
-        value: firstName,
+        value: formData.firstName,
         minLength: 3,
-        isValidSetter: setIsValidFirstName,
       },
       {
         name: "lastName",
-        value: lastName,
+        value: formData.lastName,
         minLength: 3,
-        isValidSetter: setIsValidLastName,
       },
       {
         name: "surrName",
-        value: surrName,
+        value: formData.surrName,
         minLength: 3,
-        isValidSetter: setIsValidSurrName,
       },
       {
         name: "phone",
-        value: phone,
+        value: formData.phone,
         minLength: 10,
-        isValidSetter: setIsValidPhone,
       },
     ];
-
     for (const formField of formFields) {
       if (formField.value.length < formField.minLength) {
-        formField.isValidSetter(false);
+        handleChangeValidation(false, formField.name);
         isValid = false;
       } else {
-        formField.isValidSetter(true);
+        handleChangeValidation(true, formField.name);
       }
     }
-
     if (!isValid) {
       setLoading(false);
       setShowNotification(true);
@@ -130,28 +117,23 @@ const Ordering = () => {
       scrollToTop();
       return;
     }
-
     const dto = {
-      firstName,
-      lastName,
-      surrName,
-      phone: Number(phone),
-      delivery,
-      address,
-      paymentMethod,
-      deliveryTime,
+      firstName: formData.firstName,
+      lastName: formData.lastName,
+      surrName: formData.surrName,
+      phone: Number(formData.phone),
+      delivery: formData.delivery,
+      address: formData.address,
+      paymentMethod: formData.paymentMethod,
+      deliveryTime: formData.deliveryTime,
       status: false,
     };
-
     const dtos = customsList.map((custom) => ({
       dish: custom._id,
       count: custom.count,
     }));
-
     const apiUrl: string = `${API_URL}`;
-
     const queryString: string = `${apiUrl}/api/order/create`;
-
     try {
       const res: Response = await fetch(queryString, {
         method: "POST",
@@ -160,9 +142,7 @@ const Ordering = () => {
         },
         body: JSON.stringify({ dto, dtos }),
       });
-
       const createdOrder = await res.json();
-
       if (createdOrder) {
         dispatch(clearBasket());
         setLoading(false);
@@ -178,10 +158,6 @@ const Ordering = () => {
     document.body.classList.remove("bodyOverflow-hidden");
     document.body.classList.add("bodyOverflow-auto");
   };
-
-  useEffect(() => {
-    setLoading(false);
-  }, []);
 
   const handleCloseModal = () => {
     setModalState(false);
@@ -216,34 +192,10 @@ const Ordering = () => {
             <OrderingSteps index={2} />
             <div className="basket-ordering">
               <OrderingForm
-                firstName={firstName}
-                setFirstName={setFirstName}
-                isValidFirstName={isValidFirstName}
-                setIsValidFirstName={setIsValidFirstName}
-                lastName={lastName}
-                setLastName={setLastName}
-                isValidLastName={isValidLastName}
-                setIsValidLastName={setIsValidLastName}
-                surrName={surrName}
-                setSurrName={setSurrName}
-                isValidSurrName={isValidSurrName}
-                setIsValidSurrName={setIsValidSurrName}
-                phone={phone}
-                setPhone={setPhone}
-                isValidPhone={isValidPhone}
-                setIsValidPhone={setIsValidPhone}
-                delivery={delivery}
-                setDelivery={setDelivery}
-                address={address}
-                setAddress={setAddress}
-                isValidAddress={isValidAddress}
-                setIsValidAddress={setIsValidAddress}
-                paymentMethod={paymentMethod}
-                setPaymentMethod={setPaymentMethod}
-                deliveryTime={deliveryTime}
-                setDeliveryTime={setDeliveryTime}
-                isValidDeliveryTime={isValidDeliveryTime}
-                setIsValidDeliveryTime={setIsValidDeliveryTime}
+                formData={formData}
+                handleChange={handleChange}
+                validations={validations}
+                handleChangeValidation={handleChangeValidation}
               />
               <OrderingComposition customsList={customsList} />
             </div>
@@ -253,20 +205,12 @@ const Ordering = () => {
             />
           </div>
         </div>
-
         <OrderingModal
           modalState={modalState}
           handleCloseModal={handleCloseModal}
           handleSubmitOrder={handleSubmitOrder}
           customsList={customsList}
-          firstName={firstName}
-          lastName={lastName}
-          surrName={surrName}
-          phone={phone}
-          delivery={delivery}
-          address={address}
-          deliveryTime={deliveryTime}
-          paymentMethod={paymentMethod}
+          formData={formData}
         />
       </section>
     </main>

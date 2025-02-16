@@ -1,15 +1,16 @@
 import "./styles.scss";
 
 type OrderingDeliveryCheckboxProps = {
+  name: string;
   delivery: boolean;
-  setDelivery: React.Dispatch<React.SetStateAction<boolean>>;
+  setDelivery: (value: boolean, name: string) => void;
 };
 
 const OrderingDeliveryCheckbox = (props: OrderingDeliveryCheckboxProps) => {
-  const { delivery, setDelivery } = props;
+  const { name, delivery, setDelivery } = props;
 
   const handleChangeDelivery = (event: React.ChangeEvent<HTMLInputElement>) => {
-    setDelivery(event.target.checked);
+    setDelivery(event.target.checked, name);
   };
 
   return (
@@ -18,7 +19,7 @@ const OrderingDeliveryCheckbox = (props: OrderingDeliveryCheckboxProps) => {
       <input
         className="basket-ordering-delivery-real-checkbox"
         type="checkbox"
-        name=""
+        name={name}
         id=""
         checked={delivery}
         onChange={handleChangeDelivery}

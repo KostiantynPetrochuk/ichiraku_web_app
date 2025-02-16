@@ -1,18 +1,20 @@
 import { useEffect } from "react";
 
 type OrderingInputProps = {
+  name: string;
   inputName: string;
   inputClassName: string;
   min?: number;
   value: string;
-  setValue: React.Dispatch<React.SetStateAction<string>>;
+  setValue: (value: any, inputName: any) => void;
   hidden?: boolean;
   isInputValid: boolean;
-  setIsInputValid: React.Dispatch<React.SetStateAction<boolean>>;
+  setIsInputValid: (value: any, inputName: any) => void;
 };
 
 const OrderingInputText = (props: OrderingInputProps) => {
   const {
+    name,
     inputName,
     inputClassName,
     min = 3,
@@ -23,30 +25,29 @@ const OrderingInputText = (props: OrderingInputProps) => {
     setIsInputValid,
   } = props;
   const labelClassName = `basket-ordering-${inputClassName}`;
-
   const handleChangeValue = (event: React.ChangeEvent<HTMLInputElement>) => {
-    setValue(event.target.value);
+    const value = event.target.value;
+    setValue(value, name);
     if (event.target.value.length > min - 1 && !isInputValid) {
-      setIsInputValid(true);
+      setIsInputValid(true, name);
     }
-
     if (event.target.value.length < min && isInputValid) {
-      setIsInputValid(false);
+      setIsInputValid(false, name);
     }
   };
 
   const handleInputBlur = () => {
     if (value.length < min) {
-      setIsInputValid(false);
+      setIsInputValid(false, name);
       return;
     }
-    setIsInputValid(true);
+    setIsInputValid(true, name);
   };
 
   useEffect(() => {
     if (hidden) {
-      setIsInputValid(true);
-      setValue("");
+      setIsInputValid(true, name);
+      setValue("", name);
     }
   }, [hidden]);
 
@@ -63,7 +64,7 @@ const OrderingInputText = (props: OrderingInputProps) => {
         required
         className={`basket-ordering__input${isInputValid ? "" : " _notValid"}`}
         type="text"
-        name=""
+        name={name}
         id=""
         value={value}
         onChange={handleChangeValue}

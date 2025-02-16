@@ -1,99 +1,80 @@
 import { OrderingDeliveryCheckbox, OrderingInputText } from "..";
 import OrderingPayment from "../OrderingPayment/OrderingPayment";
 import OrderingInputNumber from "../OrderingInputNumber";
-import { OrderingFormPropsT } from "./OrderingFormPropsT";
 
 import "./styles.scss";
 
-const OrderingForm = (props: OrderingFormPropsT) => {
-  const {
-    firstName,
-    setFirstName,
-    isValidFirstName,
-    setIsValidFirstName,
-    lastName,
-    setLastName,
-    isValidLastName,
-    setIsValidLastName,
-    surrName,
-    setSurrName,
-    isValidSurrName,
-    setIsValidSurrName,
-    phone,
-    setPhone,
-    isValidPhone,
-    setIsValidPhone,
-    delivery,
-    setDelivery,
-    address,
-    setAddress,
-    isValidAddress,
-    setIsValidAddress,
-    deliveryTime,
-    setDeliveryTime,
-    isValidDeliveryTime,
-    setIsValidDeliveryTime,
-    paymentMethod,
-    setPaymentMethod,
-  } = props;
+const OrderingForm = (props: any) => {
+  const { formData, handleChange, validations, handleChangeValidation } = props;
   return (
     <form className="basket-ordering-form">
       <OrderingInputText
+        name={"firstName"}
         inputName="Прізвище"
         inputClassName="firstname"
-        value={firstName}
-        setValue={setFirstName}
-        isInputValid={isValidFirstName}
-        setIsInputValid={setIsValidFirstName}
+        value={formData.firstName}
+        setValue={handleChange}
+        isInputValid={validations.firstName}
+        setIsInputValid={handleChangeValidation}
       />
       <OrderingInputText
+        name={"lastName"}
         inputName="Ім'я"
         inputClassName="lastname"
-        value={lastName}
-        setValue={setLastName}
-        isInputValid={isValidLastName}
-        setIsInputValid={setIsValidLastName}
+        value={formData.lastName}
+        setValue={handleChange}
+        isInputValid={validations.lastName}
+        setIsInputValid={handleChangeValidation}
       />
       <OrderingInputText
+        name={"surrName"}
         inputName="По батькові"
         inputClassName="surrname"
-        value={surrName}
-        setValue={setSurrName}
-        isInputValid={isValidSurrName}
-        setIsInputValid={setIsValidSurrName}
+        value={formData.surrName}
+        setValue={handleChange}
+        isInputValid={validations.surrName}
+        setIsInputValid={handleChangeValidation}
       />
       <OrderingInputNumber
+        name="phone"
         inputName="Телефон"
         inputClassName="phone"
-        value={phone}
+        value={formData.phone}
         min={10}
-        setValue={setPhone}
-        isInputValid={isValidPhone}
-        setIsInputValid={setIsValidPhone}
+        setValue={handleChange}
+        isInputValid={validations.phone}
+        setIsInputValid={handleChangeValidation}
       />
-      <OrderingDeliveryCheckbox delivery={delivery} setDelivery={setDelivery} />
+      <OrderingDeliveryCheckbox
+        name={"delivery"}
+        delivery={formData.delivery}
+        setDelivery={handleChange}
+      />
       <OrderingInputText
+        name={"address"}
         inputName="Адреса доставки"
         inputClassName="address"
-        value={address}
-        setValue={setAddress}
-        hidden={!delivery}
+        value={formData.address}
+        setValue={handleChange}
+        hidden={!formData.delivery}
         min={10}
-        isInputValid={isValidAddress}
-        setIsInputValid={setIsValidAddress}
+        isInputValid={validations.address}
+        setIsInputValid={handleChangeValidation}
       />
       <OrderingInputText
+        name={"deliveryTime"}
         inputName="Час доставки"
         inputClassName="time"
-        value={deliveryTime}
-        setValue={setDeliveryTime}
-        hidden={!delivery}
-        isInputValid={isValidDeliveryTime}
-        setIsInputValid={setIsValidDeliveryTime}
+        value={formData.deliveryTime}
+        setValue={handleChange}
+        hidden={!formData.delivery}
+        isInputValid={validations.deliveryTime}
+        setIsInputValid={handleChangeValidation}
       />
       <OrderingPayment
-        paymentMethod={paymentMethod}
-        setPaymentMethod={setPaymentMethod}
+        name={"paymentMethod"}
+        paymentMethod={formData.paymentMethod}
+        setPaymentMethod={handleChange}
       />
     </form>
   );
