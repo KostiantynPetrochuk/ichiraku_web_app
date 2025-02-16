@@ -1,12 +1,13 @@
 import { addCustom, removeCustom } from "../../../store/customSlice";
-import { useAppDispatch } from "../../../hooks";
+import { useAppDispatch, useAppSelector } from "../../../hooks";
 
 import "./styles.scss";
 
 const BasketSauce = (props: any) => {
-  const { _id, sauce, customsList } = props;
+  const { _id, sauce } = props;
   const { imagePath, name, price } = sauce;
   const dispatch = useAppDispatch();
+  const customsList = useAppSelector((state) => state.customs.list);
 
   const ifSauceInTheBasket = customsList.find((custom) => {
     return custom._id === _id;

@@ -1,3 +1,4 @@
+"use client";
 import { useAppSelector } from "../../hooks";
 import HomeButton from "../HomeButton";
 import OrderingNextButton from "../OrderingNextButton";

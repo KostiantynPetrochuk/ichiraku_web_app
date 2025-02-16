@@ -1,17 +1,13 @@
+"use client";
 import BasketSauce from "../BasketSauce";
 
 import "./styles.scss";
 
-const BasketSauces = (props: { sauces: any[]; customsList: CustomT[] }) => {
-  const { sauces, customsList } = props;
+const BasketSauces = (props: { sauces: any[] }) => {
+  const { sauces } = props;
 
   const basketSauceslist = sauces.map((sauce) => (
-    <BasketSauce
-      key={sauce._id}
-      _id={sauce._id}
-      sauce={sauce}
-      customsList={customsList}
-    />
+    <BasketSauce key={sauce._id} _id={sauce._id} sauce={sauce} />
   ));
 
   return (

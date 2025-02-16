@@ -1,32 +1,17 @@
-"use client";
-import { useEffect, useState } from "react";
-
 import BreadCrumbs from "../../components/BreadCrumbs";
 import OrderingButtons from "../../components/OrderingButtons";
 import OrderingSteps from "../../components/OrderingSteps";
-import Spinner from "../../components/Spinner";
-import BasketMessage from "../../partials/Basket/BasketMessage/BasketMessage";
 import {
-  BasketCustoms,
   BasketOrderAmount,
   BasketSauces,
+  BasketBody,
 } from "../../partials/Basket";
+import getDishesByCategory from "@/api/getDishesByCategory";
 
-import { useAppSelector } from "../../hooks";
+const Basket = async () => {
+  const sauces = await getDishesByCategory("sauce");
 
-const Basket = () => {
-  const [sauces, setSauces] = useState<any[]>([]);
-  const [loading, setLoading] = useState<boolean>(false);
-  const customsList = useAppSelector((state) => state.customs.list);
-
-  const orderAmount = customsList.reduce((a, b) => {
-    const currentItemPrice = b.count * b.dish.price;
-    return a + currentItemPrice;
-  }, 0);
-
-  return loading ? (
-    <Spinner />
-  ) : (
+  return (
     <main className="main">
       <BreadCrumbs
         pathes={[
@@ -38,13 +23,9 @@ const Basket = () => {
         <div className="container">
           <div className="basket-inner">
             <OrderingSteps index={1} />
-            {orderAmount ? (
-              <BasketCustoms customsList={customsList} />
-            ) : (
-              <BasketMessage />
-            )}
-            <BasketSauces sauces={sauces} customsList={customsList} />
-            <BasketOrderAmount amount={orderAmount} />
+            <BasketBody />
+            <BasketSauces sauces={sauces} />
+            <BasketOrderAmount />
             <OrderingButtons handleShowOrder={null} nextBtnType={null} />
           </div>
         </div>

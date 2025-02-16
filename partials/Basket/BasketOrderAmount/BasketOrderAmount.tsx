@@ -1,7 +1,14 @@
+"use client";
+import { useAppSelector } from "@/hooks";
+
 import "./styles.scss";
 
-const BasketOrderAmount = (props: { amount: number }) => {
-  const { amount } = props;
+const BasketOrderAmount = () => {
+  const customsList = useAppSelector((state) => state.customs.list);
+  const amount = customsList.reduce((a, b) => {
+    const currentItemPrice = b.count * b.dish.price;
+    return a + currentItemPrice;
+  }, 0);
 
   return (
     <div className="basket-total-amount">

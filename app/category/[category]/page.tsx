@@ -1,17 +1,6 @@
 import BreadCrumbs from "../../../components/BreadCrumbs";
 import { CategoryList } from "../../../partials/Category";
-import { API_URL } from "@/constants";
-
-async function getDishesByCategory(category: string) {
-  const url = `${API_URL}dish/category/${category}`;
-  const response = await fetch(url, {
-    method: "GET",
-    headers: {
-      "Content-Type": "application/json",
-    },
-  });
-  return await response.json();
-}
+import getDishesByCategory from "@/api/getDishesByCategory";
 
 const Category = async ({
   params,
