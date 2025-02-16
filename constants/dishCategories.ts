@@ -46,7 +46,7 @@ export const DISH_CATEGORIES: DishCategory[] = [
     __v: 0,
     imagePath: "/static/categories/sauce.webp",
     logoPath: "/static/categories_logo/sauce.svg",
-    slug: "sauces",
+    slug: "sauce",
   },
   {
     _id: "63f4cd017276ad889d49f57e",
@@ -54,6 +54,6 @@ export const DISH_CATEGORIES: DishCategory[] = [
     __v: 0,
     imagePath: "/static/categories/drinks.webp",
     logoPath: "/static/categories_logo/drinks.svg",
-    slug: "drinks",
+    slug: "drink",
   },
 ];
