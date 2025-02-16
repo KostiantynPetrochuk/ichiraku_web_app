@@ -1,9 +1,9 @@
 import BreadCrumbs from "../../../components/BreadCrumbs";
-import Spinner from "../../../components/Spinner";
 import { DishDetailsCard } from "../../../partials/Dish";
+import { API_URL } from "@/constants";
 
 async function getDishData(slug: string) {
-  const url = `dish/slug/${slug}`;
+  const url = `${API_URL}dish/slug/${slug}`;
   const response = await fetch(url, {
     method: "GET",
     headers: {

@@ -1,9 +1,9 @@
 import BreadCrumbs from "../../../components/BreadCrumbs";
-import Spinner from "../../../components/Spinner";
 import { CategoryList } from "../../../partials/Category";
+import { API_URL } from "@/constants";
 
 async function getDishesByCategory(category: string) {
-  const url = `dish/category/${category}`;
+  const url = `${API_URL}dish/category/${category}`;
   const response = await fetch(url, {
     method: "GET",
     headers: {
