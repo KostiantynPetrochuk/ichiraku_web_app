@@ -1,9 +1,5 @@
 export { default as HomeDishes } from "./HomeDishes";
 export { default as HomeDishesRow } from "./HomeDishesRow";
 export { default as HomeMoreDishesButton } from "./HomeMoreDishesButton";
-export { default as HomeNovelty } from "./HomeNovelty";
-export { default as HomeNoveltyItem } from "./HomeNoveltyItem";
-export { default as HomeEvents } from "./HomeEvents";
-export { default as HomeEventsItem } from "./HomeEventsItem";
 export { default as HomeInfo } from "./HomeInfo";
 export { default as HomeInfoItem } from "./HomeInfoItem";
