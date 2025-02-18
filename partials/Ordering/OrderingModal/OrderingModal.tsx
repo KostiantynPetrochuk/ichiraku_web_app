@@ -114,7 +114,7 @@ const OrderingModal = (props: OrderingModalT) => {
             (acc, current) => current.count * current.dish.price + acc,
             0
           )}
-          грн.
+          &nbsp;грн.
         </span>
       </div>
     </Modal>

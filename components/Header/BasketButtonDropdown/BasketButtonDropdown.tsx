@@ -29,7 +29,7 @@ const BasketButtonDropdown = () => {
         {customsList.length ? (
           <>
             <span>Сума замовлення</span>
-            <span>{orderAmount} грн</span>
+            <span>{orderAmount}&nbsp;грн</span>
           </>
         ) : (
           <span className="header-bot-basket-amount__info">Кошик пустий</span>

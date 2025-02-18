@@ -59,7 +59,7 @@ const BasketButtonDropdownItem = (props: BasketButtonDropdownItemPropTypes) => {
           <span></span>
           <span></span>
         </span>
-        <span className="header-bot-basket-item__price">{price}грн</span>
+        <span className="header-bot-basket-item__price">{price}&nbsp;грн</span>
       </div>
     </li>
   );

@@ -30,7 +30,7 @@ const OrderingComposition = (props: { customsList: any[] }) => {
           Сума замовлення
         </span>
         <span className="basket-ordering-composition-total__amount">
-          {orderAmount}грн
+          {orderAmount}&nbsp;грн
         </span>
       </div>
     </div>

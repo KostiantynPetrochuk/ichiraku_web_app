@@ -15,13 +15,13 @@ const OrderingCompositionItem = (props: OrderingCompositionItemPropsType) => {
         {name}
       </span>
       <span className="basket-ordering-composition-list-item__price">
-        {price}грн
+        {price}&nbsp;грн
       </span>
       <span className="basket-ordering-composition-list-item__count">
         х{count}
       </span>
       <span className="basket-ordering-composition-list-item__total-price">
-        {price * count}грн
+        {price * count}&nbsp;грн
       </span>
     </li>
   );

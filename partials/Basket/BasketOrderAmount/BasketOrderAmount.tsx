@@ -13,7 +13,7 @@ const BasketOrderAmount = () => {
   return (
     <div className="basket-total-amount">
       <h3 className="basket-total-amount__title">Сума замовлення:</h3>
-      <span className="basket-total-amount__count">{amount}грн</span>
+      <span className="basket-total-amount__count">{amount}&nbsp;грн</span>
     </div>
   );
 };

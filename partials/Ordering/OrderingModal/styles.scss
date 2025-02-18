@@ -7,7 +7,7 @@
   &-buyer-row {
     display: flex;
     justify-content: space-between;
-    margin: 8px 0;
+    margin: 10px 0;
 
     &__title {
       font-weight: bold;
@@ -21,17 +21,23 @@
 
   &-list {
     list-style: none;
-    padding: 0 20px;
+    padding: 0;
     border-bottom: 1px solid rgb(154, 154, 154);
     padding-bottom: 10px;
 
     &-item {
       display: grid;
-      grid-template-columns: 1fr 0.1fr 0.3fr;
-      margin: 8px 0;
+      grid-template-columns: 1.7fr 0.5fr 0.8fr;
+      align-items: center;
+      gap: 5px;
+      margin: 10px 0;
+
+      & span:nth-child(1) {
+        font-weight: bold;
+      }
 
       & span:nth-child(2) {
-        margin: 0 20px;
+        text-align: end;
       }
 
       & span:nth-child(3) {
@@ -57,6 +63,27 @@
     &__amount {
       font-weight: bold;
       font-size: 18px;
+    }
+  }
+
+  @media (max-width: 480px) {
+    &-list-item {
+      grid-template-columns: 1fr 1fr;
+      grid-template-rows: auto auto;
+      text-align: left;
+      margin-bottom: 10px;
+
+      & span:nth-child(1) {
+        grid-column: 1 / span 2;
+      }
+
+      & span:nth-child(2) {
+        text-align: left;
+      }
+
+      & span:nth-child(3) {
+        text-align: right;
+      }
     }
   }
 }

@@ -14,11 +14,12 @@
 
   &__count {
     color: rgba(35, 31, 32, 0.5);
-    text-align: center;
+    text-align: end;
   }
 
   &__total-price {
     color: #000;
+    text-align: end;
   }
 
   &__name {
@@ -28,9 +29,9 @@
   }
 
   &__price {
+    text-align: end;
     @media screen and (max-width: 600px) {
       grid-area: price;
-      text-align: end;
     }
   }
 
