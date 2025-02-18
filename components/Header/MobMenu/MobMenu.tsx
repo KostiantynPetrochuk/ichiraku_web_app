@@ -37,11 +37,17 @@ const MobMenu = (props: MobMenuPropsType) => {
       className={`header-mob-menu${mobMenuState ? " visible" : ""}`}
       id="mob_menu"
     >
-      <img
-        className="header-mob-menu__logo"
-        src={"/img/logo_mob.jpg"}
-        alt={""}
-      />
+      <div className="mob-menu-top">
+        <img
+          className="header-mob-menu__logo"
+          src={"/img/logo_mob.jpg"}
+          alt={""}
+        />
+        <span className="mob-menu-cross" onClick={handleMenuButtonClick}>
+          <span></span>
+          <span></span>
+        </span>
+      </div>
       <ul className="header-mob-menu-list">{mobLinks}</ul>
       <HeaderMobButton handleMenuButtonClick={handleMenuButtonClick} />
     </div>

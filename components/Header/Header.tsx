@@ -1,5 +1,5 @@
 "use client";
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import Link from "next/link";
 
 import BasketButton from "./BasketButton";
@@ -14,6 +14,21 @@ import "./styles.scss";
 
 const Header = () => {
   const [mobMenuState, setMobMenuState] = useState<boolean>(false);
+  const [isVisible, setIsVisible] = useState(false);
+
+  useEffect(() => {
+    const handleScroll = () => {
+      if (window.scrollY > 90) {
+        setIsVisible(true);
+        return;
+      }
+      setIsVisible(false);
+    };
+    window.addEventListener("scroll", handleScroll);
+    return () => {
+      window.removeEventListener("scroll", handleScroll);
+    };
+  }, []);
 
   return (
     <header className="header">
@@ -43,10 +58,26 @@ const Header = () => {
             <BasketButton />
           </div>
         </div>
+        <div className={`header-bot-fixed${isVisible ? " __show" : ""}`}>
+          <div className="container">
+            <div className="header-bot">
+              <HeaderNav />
+              <BasketButton />
+            </div>
+          </div>
+        </div>
         <HeaderMob
           mobMenuState={mobMenuState}
           setMobMenuState={setMobMenuState}
         />
+        <div className={`header-mob-fixed${isVisible ? " __show" : ""}`}>
+          <div className="container">
+            <HeaderMob
+              mobMenuState={mobMenuState}
+              setMobMenuState={setMobMenuState}
+            />
+          </div>
+        </div>
       </div>
     </header>
   );
