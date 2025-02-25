@@ -3,7 +3,6 @@ import OrderingButtons from "../../components/OrderingButtons";
 import OrderingSteps from "../../components/OrderingSteps";
 import {
   BasketOrderAmount,
-  BasketSauces,
   BasketBody,
 } from "../../partials/Basket";
 import getDishesByCategory from "@/api/getDishesByCategory";
@@ -24,7 +23,6 @@ const Basket = async () => {
           <div className="basket-inner">
             <OrderingSteps index={1} />
             <BasketBody />
-            <BasketSauces sauces={sauces} />
             <BasketOrderAmount />
             <OrderingButtons handleShowOrder={null} nextBtnType={null} />
           </div>

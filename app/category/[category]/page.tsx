@@ -9,6 +9,9 @@ const Category = async ({
 }) => {
   const { category } = await params;
   const dishes = await getDishesByCategory(category);
+  const categoryArr = category.split("");
+  categoryArr[0] = categoryArr[0].toLocaleUpperCase();
+  const categoryName = categoryArr.join("");
 
   return (
     <main className="main">
@@ -18,7 +21,7 @@ const Category = async ({
           { path: "/category/", name: dishes[0]?.dishCategory.name },
         ]}
       /> */}
-      <CategoryList dishes={dishes} />
+      <CategoryList name={categoryName} dishes={dishes} />
     </main>
   );
 };

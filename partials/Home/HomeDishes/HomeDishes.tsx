@@ -3,15 +3,28 @@ import HomeDishesRow from "../HomeDishesRow";
 import "./styles.scss";
 
 const HomeDishes = (props: any) => {
-  const { pizza, ramen, pasta, rolls } = props;
+  const { soups, noodles, salads, rice, drinks } = props;
 
   return (
     <section className="dishes">
       <div className="container">
-        <HomeDishesRow dishes={pizza} categoryName={"Піца"} slug={"pizza"} />
-        <HomeDishesRow dishes={ramen} categoryName={"Рамен"} slug={"ramen"} />
-        <HomeDishesRow dishes={pasta} categoryName={"Паста"} slug={"pasta"} />
-        <HomeDishesRow dishes={rolls} categoryName={"Роли"} slug={"rolls"} />
+        <HomeDishesRow dishes={soups} categoryName={"Soups"} slug={"soups"} />
+        <HomeDishesRow
+          dishes={noodles}
+          categoryName={"Noodles"}
+          slug={"noodles"}
+        />
+        <HomeDishesRow
+          dishes={salads}
+          categoryName={"Salads"}
+          slug={"salads"}
+        />
+        <HomeDishesRow dishes={rice} categoryName={"Rice"} slug={"rice"} />
+        <HomeDishesRow
+          dishes={drinks}
+          categoryName={"Drinks"}
+          slug={"drinks"}
+        />
       </div>
     </section>
   );
