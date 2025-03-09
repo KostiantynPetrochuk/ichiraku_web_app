@@ -14,11 +14,31 @@ import { useAppSelector } from "../../hooks";
 import { clearBasket } from "../../store/customSlice";
 import { useAppDispatch } from "../../hooks";
 import { API_URL } from "@/constants";
+import { useRouter } from "next/navigation";
 
 import "./styles.scss";
 
+type BodyDishItem = {
+  dishId: string;
+  quantity: number;
+};
+
+type BodyDataType = {
+  clientId?: string;
+  firstName: string;
+  lastName: string;
+  surrName: string;
+  phone: string;
+  delivery: boolean;
+  address?: string;
+  deliveryTime?: string;
+  paymentMethod: "cash" | "online";
+  dishes: BodyDishItem[];
+};
+
 const Ordering = () => {
   const dispatch = useAppDispatch();
+  const router = useRouter();
   const [formData, setFormData] = useState({
     firstName: "",
     lastName: "",
@@ -117,41 +137,46 @@ const Ordering = () => {
       scrollToTop();
       return;
     }
-    const dto = {
+    const userDishes = customsList.map((custom) => ({
+      dishId: custom._id,
+      quantity: custom.count,
+    }));
+    const body: BodyDataType = {
+      // clientId: "",
       firstName: formData.firstName,
       lastName: formData.lastName,
       surrName: formData.surrName,
-      phone: Number(formData.phone),
-      delivery: formData.delivery,
-      address: formData.address,
-      paymentMethod: formData.paymentMethod,
-      deliveryTime: formData.deliveryTime,
-      status: false,
+      phone: formData.phone,
+      delivery: formData.delivery ?? false,
+      paymentMethod: formData.paymentMethod ? "online" : "cash",
+      dishes: userDishes,
     };
-    const dtos = customsList.map((custom) => ({
-      dish: custom._id,
-      count: custom.count,
-    }));
+    if (formData.delivery) {
+      body.address = formData.address;
+      body.deliveryTime = formData.deliveryTime;
+    }
     const apiUrl: string = `${API_URL}`;
-    const queryString: string = `${apiUrl}/api/order/create`;
+    const queryString: string = `${apiUrl}order/create`;
     try {
-      const res: Response = await fetch(queryString, {
+      const response: Response = await fetch(queryString, {
         method: "POST",
         headers: {
           "Content-Type": "application/json",
         },
-        body: JSON.stringify({ dto, dtos }),
+        body: JSON.stringify(body),
       });
-      const createdOrder = await res.json();
-      if (createdOrder) {
-        dispatch(clearBasket());
-        setLoading(false);
-        // navigate("/confirmed");
+      if (!response.ok) {
+        setShowErrorMessage(true);
+        return;
       }
+      const data = await response.json();
+      dispatch(clearBasket());
+      router.push("/confirmed");
     } catch (error) {
-      setLoading(false);
       setModalState(false);
       setShowErrorMessage(true);
+    } finally {
+      setLoading(false);
     }
 
     window.scrollTo({ top: 0, behavior: "smooth" });
